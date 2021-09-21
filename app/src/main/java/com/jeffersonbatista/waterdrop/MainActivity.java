@@ -2,6 +2,7 @@ package com.jeffersonbatista.waterdrop;
 
 import androidx.annotation.LongDef;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private int hour;
     private int minute;
     private int interval;
+
+    private boolean activated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,14 @@ public class MainActivity extends AppCompatActivity {
         minute = timePicker.getCurrentMinute();
 
         interval = Integer.parseInt(sInterval);
+
+        if(!activated){
+            btnStart.setText(R.string.pause);
+            btnStart.setBackgroundTintList(ContextCompat.getColorStateList(this, android.R.color.black));
+        } else {
+            btnStart.setText(R.string.start);
+            btnStart.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorAccent));
+        }
 
         Log.d("Teste","Hora: " + hour + " Minuto: " + minute +" Intervalo: "+ interval);
     }

@@ -3,4 +3,5 @@
     <string name="interval">Interval (min.)</string>
     <string name="start">Start</string>
     <string name="error_msg">Digite o Intervalo</string>
+    <string name="pause">Pause</string>
 </resources>
