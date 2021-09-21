@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         timePicker = findViewById(R.id.time_picker);
         //Muda o relógio para o formato 24h
         timePicker.setIs24HourView(true);
-
-        btnStart.setOnClickListener(clickStart);
+    }
+        //...2° maneira: btnStart.setOnClickListener(clickStart);
 
         /* 3 maneiras de capturar eventos de touch
         1° Eventos de click direto pelo XML na activity - Criar uma id de função no XML e chamar ela na activity
@@ -52,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
     };);
         2° e 3° Maneira não é necessário alterar o XML
          */
-    }
+
     // 2° Maneira - Intermediária - Evento de Click com variável anônima
-    public View.OnClickListener clickStart = new View.OnClickListener() {
+    /* public View.OnClickListener clickStart = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             String sInterval = editMinutes.getText().toString();
@@ -66,10 +67,16 @@ public class MainActivity extends AppCompatActivity {
 
             Log.d("Teste","Hora: " + hour + " Minuto: " + minute +" Intervalo: "+ interval);
         }
-    };
+    };*/
     // 1° Maneira - Mais fácil - Evento de Click via XML
     public void clickStart(View view){
         String sInterval = editMinutes.getText().toString();
+
+        //Tratativa do bug empty value
+        if(sInterval.isEmpty()){
+            Toast.makeText(this, R.string.error_msg, Toast.LENGTH_LONG).show();
+            return;
+        }
 
         hour = timePicker.getCurrentHour();
         minute = timePicker.getCurrentMinute();
